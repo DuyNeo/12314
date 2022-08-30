@@ -1,0 +1,79 @@
+﻿@page "/MonanList"
+
+@using ASM.Server.Data
+@inject IMonAnSvc _monanService
+<h1>danh sach mon an</h1>
+@if (monAns == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <a class="btn btn-success p-10" href="/MonAnDialog/0">them</a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Tên</th>
+                <th>Giá</th>
+                <th>Phân loại</th>
+                <th>Hình</th>
+                <th>Trạng thái</th>
+                
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in monAns)
+            {
+                <tr>
+                    <td>@item.Name </td>
+                    <td>@item.Gia</td>
+                    <td>
+                        @switch (@item.phanLoai)
+                        {
+                            case MonAn.PhanLoai.DoAnNhanh:
+                                <span class="badge bg-success">Đồ ăn nhanh</span>
+                                break;
+
+                            default:
+                                <span class="badge bg-warning text-dark">Combo</span>
+                                break;
+                        }
+                    </td>
+                    <td>
+                        @if (item.Photos.Any())
+                        {
+                        <img src="images/food/@item.Photos.FirstOrDefault().FileName" alt="" style="width:150px;border-radius:0px">
+                        }
+                        else
+                        {
+                        <img src="/images/nophoto.png" alt="" style="width:150px;border-radius:0px">
+                        }
+                    </td>
+                    <td>@item.TrangThai</td>
+  
+                    <td>
+                        <a class="btn btn-info" href="/MonAnDialog/@item.Id">Sua</a>
+                        <a class="btn btn-info" @onclick="@(()=> Delete(item.Id))">Xoa</a>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    public List<MonAn> monAns;
+    protected override void OnInitialized()
+    {
+        monAns = _monanService.GetMonAnAll();
+    }
+    private void Delete(int id)
+    {
+        //_nguoidungService.AddnguoidungDelete(id);
+        //emloyees = _service.GetEmployees();
+    }
+
+}

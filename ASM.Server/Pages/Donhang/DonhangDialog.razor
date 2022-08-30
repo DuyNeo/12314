@@ -1,0 +1,54 @@
+﻿@page "/Donhangdialog/{id}"
+@using System.IO
+
+@using Microsoft.AspNetCore.Hosting
+@inject IDonHangSvc _donhangService
+@inject NavigationManager navigation
+@inject IWebHostEnvironment env
+<h3>@Tieude</h3>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <EditForm Model="@donHang" OnInvalidSubmit="@SubmitForm">
+            <DataAnnotationsValidator>
+                <input type="hidden" @bind="donHang.DonHangID"/>
+                <div class="form-group">
+                   @*<label class="control-label">Ten mon an</label>
+                    <input @bind="monAn.Name" class="form-control" />
+                    <ValidationMessage For="@(() =>" />*@
+                    <label class="control-label">Khach hang</label>
+                    <input @bind="donHang.KhachHang"/>
+                </div>
+
+            </DataAnnotationsValidator>
+        </EditForm>
+    </div>
+</div>
+@code {
+    [Parameter]
+    public string id { get; set; }
+    private DonHang donHang { get; set; }
+    private string Tieude = "";
+    IReadOnlyList<IBrowserFile> selectedFiles;
+    protected override void OnInitialized()
+    {
+        if(string.IsNullOrWhiteSpace(id)|| id == "0")
+        {
+            navigation.NavigateTo("donhangList", true);
+        }
+        else
+        {
+            Tieude = "Sua don hang";
+            donHang = _donhangService.GetDonHang(int.Parse(id));
+        }
+    }
+    private async void SubmitForm()
+    {
+        _donhangService.EditDonHang(donHang.DonHangID, donHang);
+        navigation.NavigateTo("DonhangList");
+    }
+    private void Cancel()
+    {
+        navigation.NavigateTo("DonhangList", true);
+    }
+}

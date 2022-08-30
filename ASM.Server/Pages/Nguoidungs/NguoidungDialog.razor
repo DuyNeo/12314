@@ -1,0 +1,110 @@
+﻿@page "/nguoidungdialog/{id}"
+
+@inject INguoidungSvc _nguoidungService
+@inject NavigationManager navigation
+<h3>@Tieude</h3>
+<div class="row">
+    <div class="col-md-4">
+        <EditForm Model="@nguoidung" OnValidSubmit="@SubmitForm">
+            <DataAnnotationsValidator>
+            </DataAnnotationsValidator>
+                <input type="hidden" @bind="nguoidung.NguoiDungId" />
+                <div class="form-group">
+                    <label class="control-label">Ten dang nhap</label>
+                    <input @bind="nguoidung.UserName" class="form-control" />
+                    <ValidationMessage For="@(() => nguoidung.UserName)" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Ho ten</label>
+                    <input @bind="nguoidung.FullName" class="form-control" />
+                    <ValidationMessage For="@(() => nguoidung.FullName)" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Email</label>
+                    <input @bind="nguoidung.Email" class="form-control" />
+                    <ValidationMessage For="@(() => nguoidung.Email)" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Chuc danh</label>
+                    <input @bind="nguoidung.Title" class="form-control" />
+                    <ValidationMessage For="@(() => nguoidung.Title)" />
+                </div>
+                <div class="form-group">
+                    <label for="nguoidung.DOB" class="control-label">Ngay sinh</label>
+                    <input type="date" @bind="nguoidung.DOB" class="form-control" />
+                    <ValidationMessage For="@(() => nguoidung.DOB)" />
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" @bind="nguoidung.IsAdmin" />Quan tri
+                    </label>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" @bind="nguoidung.Locked" />Su dung
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="nguoidung.Password" class="control-label">Mat khau</label>
+                    <input type="password" @bind="nguoidung.Password" class="form-control" />
+                    <ValidationMessage For="@(() => nguoidung.Password)" />
+                </div>
+                <div class="form-group">
+                    <label for="nguoidung.ConfirmPassword" class="control-label">Mat khau 2</label>
+                    <input type="password" @bind="nguoidung.ConfirmPassword" class="form-control" />
+                    <ValidationMessage For="@(() => nguoidung.ConfirmPassword)" />
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-info">Luu</button>
+                    <input type="button" class="btn btn-primary" @onclick="@Cancel" value="Thoat" />
+                </div>
+        </EditForm>
+    </div>
+</div>
+
+
+
+
+
+
+
+@code {
+    [Parameter]
+    public string id { get; set; }
+    private Nguoidung nguoidung { get; set; }
+    private string Tieude = "";
+    protected override void OnInitialized()
+    {
+        if (string.IsNullOrEmpty(id) || id == "0")
+        {
+            Tieude = "Thêm người dùng";
+            //nguoidung = _nguoiDungSvc.GetNguoiDung(int.Parse(id));
+            nguoidung = new Nguoidung()
+            {
+                NguoiDungId = int.Parse(id)
+            };
+        }
+        else
+        {
+            Tieude = "Sửa người dùng";
+            nguoidung = _nguoidungService.GetNguoiDung(int.Parse(id));
+        }
+    }
+    private void SubmitForm()
+    {
+        if (nguoidung.NguoiDungId == 0)
+        {
+            _nguoidungService.AddNguoiDung(nguoidung);
+        }
+        else
+        {
+            _nguoidungService.EditNguoiDung(nguoidung.NguoiDungId, nguoidung);
+        }
+        navigation.NavigateTo("NguoidungList");
+    }
+    private void Cancel()
+    {
+        navigation.NavigateTo("NguoidungList", true);
+
+    }
+}

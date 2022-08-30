@@ -1,0 +1,94 @@
+﻿@page "/DonhangDetail/{id}"
+
+@using System.IO
+@using Microsoft.AspNetCore.Hosting
+@inject IDonHangSvc _donhangService
+@inject NavigationManager navigation
+@inject IWebHostEnvironment env
+<h3>Chi tiet don hang</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">Khách hàng </dt>
+        <dd class="col-sm-10">
+            @model.KhachHang
+        </dd>
+        <dt class="col-sm-2">Ngày đặt</dt>
+        <dd class="col-sm-10">
+            @model.NgayDat
+        </dd>
+        <dt class="col-sm-2"></dt>
+        <dd class="col-sm-10">
+            @model.NgayDat
+        </dd>
+        <dt class="col-sm-2">Tổng tiền</dt>
+        <dd class="col-sm-10">
+            @model.Tongtien
+        </dd>
+        <dt class="col-sm-2">Trạng thái</dt>
+        <dd class="col-sm-10">
+            @model.TrangthaiDonhang
+        </dd>
+        <dt class="col-sm-2">Ghi chú</dt>
+        <dd class="col-sm-10">
+            @model.Ghichu
+        </dd>
+    </dl>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Món ăn
+                </th>
+                <th>
+                    Hình
+                </th>
+                <th>
+                    Số lượng
+                </th>
+                <th>
+                    Thành tiền
+                </th>
+                <th>
+                    Ghi chú
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var item in model.donHangChiTiets)
+            {
+            <tr>
+                <td>@item.MonAn.Name</td>
+                <td>
+                    <img style="width:150px"/>
+                </td>
+                <td>@item.SoLuong</td>
+                <td>@item.ThanhTien</td>
+                @*<td>@item.GhiChu</td>*@
+
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div>
+    <a class="btn btn-info">Sua</a>
+    <a class="btn ">Danh sach</a>
+</div>
+@code {
+    [Parameter]
+    public string id { get; set; }
+    private string Tieude = "";
+    public DonHang model;
+    protected override void OnInitialized()
+    {
+        if(string.IsNullOrWhiteSpace(id) || id == "0")
+        {
+            navigation.NavigateTo("donhangList", true);
+        }
+        else
+        {
+            model = _donhangService.GetDonHang(int.Parse(id));
+        }
+    }
+}

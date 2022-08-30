@@ -1,0 +1,15 @@
+C:\Users\hp\OneDrive\Máy tính\ASM.Share\ASM.Shares\obj\Debug\net5.0\ASM.Shares.csproj.AssemblyReference.cache
+C:\Users\hp\OneDrive\Máy tính\ASM.Share\ASM.Shares\obj\Debug\net5.0\ASM.Shares.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hp\OneDrive\Máy tính\ASM.Share\ASM.Shares\obj\Debug\net5.0\ASM.Shares.AssemblyInfoInputs.cache
+C:\Users\hp\OneDrive\Máy tính\ASM.Share\ASM.Shares\obj\Debug\net5.0\ASM.Shares.AssemblyInfo.cs
+C:\Users\hp\OneDrive\Máy tính\ASM.Share\ASM.Shares\obj\Debug\net5.0\ASM.Shares.csproj.CoreCompileInputs.cache
+C:\Users\hp\OneDrive\Máy tính\ASM.Share\ASM.Shares\bin\Debug\net5.0\ASM.Shares.deps.json
+C:\Users\hp\OneDrive\Máy tính\ASM.Share\ASM.Shares\bin\Debug\net5.0\ASM.Shares.runtimeconfig.json
+C:\Users\hp\OneDrive\Máy tính\ASM.Share\ASM.Shares\bin\Debug\net5.0\ASM.Shares.runtimeconfig.dev.json
+C:\Users\hp\OneDrive\Máy tính\ASM.Share\ASM.Shares\bin\Debug\net5.0\ASM.Shares.dll
+C:\Users\hp\OneDrive\Máy tính\ASM.Share\ASM.Shares\bin\Debug\net5.0\ref\ASM.Shares.dll
+C:\Users\hp\OneDrive\Máy tính\ASM.Share\ASM.Shares\bin\Debug\net5.0\ASM.Shares.pdb
+C:\Users\hp\OneDrive\Máy tính\ASM.Share\ASM.Shares\obj\Debug\net5.0\ASM.Shares.dll
+C:\Users\hp\OneDrive\Máy tính\ASM.Share\ASM.Shares\obj\Debug\net5.0\ref\ASM.Shares.dll
+C:\Users\hp\OneDrive\Máy tính\ASM.Share\ASM.Shares\obj\Debug\net5.0\ASM.Shares.pdb
+C:\Users\hp\OneDrive\Máy tính\ASM.Share\ASM.Shares\obj\Debug\net5.0\ASM.Shares.genruntimeconfig.cache

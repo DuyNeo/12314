@@ -1,0 +1,56 @@
+﻿@page "/khachhangdetail/{id}"
+@using System.IO
+@using Shares
+@using Microsoft.AspNetCore.Hosting;
+@inject DataContext _context
+@inject NavigationManager navigation
+@inject IWebHostEnvironment env
+
+<h3>Chi tiết đơn hàng</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">User Name</dt>
+        <dd class="col-sm-10">
+            @user.UserName
+        </dd>
+        <dt class="col-sm-2">Địa chỉ</dt>
+        <dd class="col-sm-10">
+            @user.HomeAddress
+        </dd>
+        <dt class="col-sm-2">Ngày sinh</dt>
+        <dd class="col-sm-10">
+            @user.DayOfBirth
+        </dd>
+        <dt class="col-sm-2">Email</dt>
+        <dd class="col-sm-10">
+            @user.Email
+        </dd>
+        <dt class="col-sm-2">SDT</dt>
+        <dd class="col-sm-10">
+            @user.PhoneNumber
+        </dd>
+    </dl>
+
+</div>
+<div>
+
+    <a class="btn btn-info" href="/khachhanglist">Danh sách</a>
+</div>
+@code{
+    [Parameter]
+    public string id { get; set; }
+    public string TieuDe { get; set; }
+    public AppUser user;
+    protected override void OnInitialized()
+    {
+        if (string.IsNullOrEmpty(id) || id == "0")
+        {
+            navigation.NavigateTo("khachhanglist", true);
+        }
+        else
+        {
+            user = _context.Users.FirstOrDefault(x => x.Id == id);
+        }
+    }
+}
